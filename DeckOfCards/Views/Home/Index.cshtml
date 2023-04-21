@@ -1,0 +1,19 @@
+﻿@model DrawCards
+
+<p>Deck ID: @Model.deck_id</p>
+
+<form asp-controller="Home" asp-action="Draw" method="post">
+<table>
+@for (int i = 0; i < Model.cards.Count(); i++)
+{
+    <tr>
+        <th>@Model.cards[i].value of @Model.cards[i].suit</th>
+        <th><img src=@Model.cards[i].image style="width:75px;height:100px"></th>
+        <th><input asp-for="@Model.cards[i].keep" type="checkbox"/></th>
+        @Html.HiddenFor(x => x.cards[i].code)
+    </tr>
+}
+</table>
+    @Html.HiddenFor(m => m.deck_id)
+    <button type="submit" class="btn btn-primary">Draw</button>
+</form>
